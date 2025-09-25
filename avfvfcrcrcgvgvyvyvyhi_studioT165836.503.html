@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="professional-light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toolify - Essential Tools for Everyday Productivity</title>
+    <!-- Font Awesome CDN for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+        :root, [data-theme="professional-light"] {
+            --primary-bg-color: #f4f7f9;
+            --secondary-bg-color: #ffffff;
+            --header-bg-gradient: linear-gradient(135deg, #4a90e2, #50e3c2);
+            --card-bg-color: #ffffff;
+            --card-border-color: #e0e7ee;
+            --primary-text-color: #212529;
+            --secondary-text-color: #5a6a7b;
+            --subtitle-color: #4a90e2;
+            --nav-bg-color: #ffffff;
+            --header-underline-color: #4a90e2;
+            --toggle-active-bg: #4a90e2;
+            --toggle-inactive-bg: #e9ecef;
+        }
+
+        [data-theme="professional-dark"] {
+            --primary-bg-color: #1a1a2e;
+            --secondary-bg-color: #16213e;
+            --header-bg-gradient: linear-gradient(135deg, #0f3460, #16213e);
+            --card-bg-color: #1f4068;
+            --card-border-color: #30363d;
+            --primary-text-color: #e9ecef;
+            --secondary-text-color: #a9b3c1;
+            --subtitle-color: #e94560;
+            --nav-bg-color: #16213e;
+            --header-underline-color: #e94560;
+            --toggle-active-bg: #e94560;
+            --toggle-inactive-bg: #1f4068;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            background-color: var(--primary-bg-color);
+            color: var(--primary-text-color);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .top-nav {
+            background-color: var(--secondary-bg-color);
+            padding: 10px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .top-nav .logo a {
+            text-decoration: none;
+            color: var(--primary-text-color);
+            font-size: 1.5em;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+
+        .top-nav .logo .fa-tools {
+            margin-right: 10px;
+            color: var(--subtitle-color);
+        }
+
+        .header-section {
+            text-align: center;
+            padding: 70px 20px;
+            background: var(--header-bg-gradient);
+            color: #ffffff;
+        }
+
+        .header-section h1 {
+            font-size: 3em;
+            margin: 0;
+            font-weight: 700;
+        }
+
+        .header-section .subtitle {
+            font-weight: 400;
+            color: var(--primary-text-color);
+            margin-top: 15px;
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .tabs-container {
+            position: sticky;
+            top: 0;
+            z-index: 999;
+        }
+        .tab-nav {
+            display: flex;
+            background-color: var(--nav-bg-color);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        .tab-link {
+            flex: 1;
+            padding: 15px 10px;
+            text-align: center;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            background-color: transparent;
+            color: var(--secondary-text-color);
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+        .tab-link:hover {
+            background-color: var(--toggle-inactive-bg);
+        }
+        .tab-link.active {
+            color: var(--subtitle-color);
+            border-bottom: 3px solid var(--subtitle-color);
+        }
+        .tab-pane {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        .tab-pane.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .options-panel {
+            background-color: var(--primary-bg-color);
+            padding: 30px 20px;
+        }
+        .modern-options {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 35px;
+        }
+        .options-section {
+            background-color: var(--secondary-bg-color);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        .options-section h4 {
+            margin: 0 0 20px 0;
+            font-size: 1.2em;
+            color: var(--primary-text-color);
+            border-bottom: 1px solid var(--card-border-color);
+            padding-bottom: 10px;
+        }
+        .toggle-group {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .toggle-btn {
+            padding: 8px 18px;
+            border-radius: 20px;
+            background-color: var(--toggle-inactive-bg);
+            color: var(--primary-text-color);
+            border: none;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .toggle-btn:hover { opacity: 0.8; }
+        .toggle-btn.active {
+            background: var(--toggle-active-bg);
+            color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .theme-switcher-modern {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        .theme-switcher-modern input[type="radio"] {
+            display: none;
+        }
+        .theme-switcher-modern label {
+            flex: 1;
+            max-width: 200px;
+            padding: 15px;
+            border: 2px solid var(--card-border-color);
+            border-radius: 10px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .theme-switcher-modern label:hover {
+            border-color: var(--subtitle-color);
+        }
+        .theme-switcher-modern .icon {
+            font-size: 1.8em;
+            margin-bottom: 8px;
+            color: var(--secondary-text-color);
+        }
+        .theme-switcher-modern .text {
+            font-weight: 600;
+        }
+        .theme-switcher-modern input[type="radio"]:checked + label {
+            background-color: var(--toggle-active-bg);
+            border-color: var(--toggle-active-bg);
+            color: #ffffff;
+        }
+        .theme-switcher-modern input[type="radio"]:checked + label .icon {
+            color: #ffffff;
+        }
+
+        .main-content { padding: 40px 20px; }
+        .tool-section { margin-bottom: 50px; }
+        .tool-section h2 {
+            font-weight: 700;
+            color: var(--primary-text-color);
+            border-bottom: 3px solid var(--header-underline-color);
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+            font-size: 2em;
+        }
+
+        .grid-layout {
+            display: grid;
+            gap: 25px;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        }
+
+        .card-link { text-decoration: none; }
+        .card {
+            background-color: var(--card-bg-color);
+            border: 1px solid var(--card-border-color);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 160px;
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.05);
+        }
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
+        }
+        .card-icon {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            color: var(--subtitle-color);
+        }
+        .card-title {
+            font-size: 1.15em;
+            font-weight: 600;
+            color: var(--primary-text-color);
+            margin: 0;
+        }
+
+        @media (max-width: 600px) {
+            .header-section h1 { font-size: 2.2em; }
+            .grid-layout { grid-template-columns: 1fr; }
+            .top-nav .logo a { font-size: 1.2em; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="top-nav">
+        <div class="logo">
+            <a href="#">
+                <i class="fas fa-tools"></i>
+                <span>Toolify</span>
+            </a>
+        </div>
+    </nav>
+
+    <header class="header-section">
+        <h1>Essential Tools Suite</h1>
+        <p class="subtitle">Streamlined for Your Daily Productivity</p>
+    </header>
+
+    <div class="tabs-container">
+        <div class="tab-nav">
+            <button class="tab-link active" data-tab="tools">Tools</button>
+            <button class="tab-link" data-tab="options">Options</button>
+        </div>
+    </div>
+
+    <main>
+        <div class="tab-content">
+            <div id="options" class="tab-pane">
+                <div class="options-panel">
+                    <div class="modern-options">
+                        <div class="options-section">
+                            <h4>Filter by Category</h4>
+                            <div class="toggle-group" id="category-filter">
+                                <a href="#" class="toggle-btn active" data-category="all">All</a>
+                                <a href="#" class="toggle-btn" data-category="image-tools">Image</a>
+                                <a href="#" class="toggle-btn" data-category="pdf-tools">PDF</a>
+                                <a href="#" class="toggle-btn" data-category="calculators">Calculators</a>
+                            </div>
+                        </div>
+                        <div class="options-section">
+                            <h4>Appearance</h4>
+                            <div class="theme-switcher-modern" id="theme-switcher">
+                                <input type="radio" id="light-theme" name="theme" value="professional-light" checked>
+                                <label for="light-theme">
+                                    <div class="icon"><i class="fas fa-sun"></i></div>
+                                    <div class="text">Light</div>
+                                </label>
+                                <input type="radio" id="dark-theme" name="theme" value="professional-dark">
+                                <label for="dark-theme">
+                                    <div class="icon"><i class="fas fa-moon"></i></div>
+                                    <div class="text">Dark</div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tools" class="tab-pane active">
+                <div class="main-content">
+                    <section id="image-tools" class="tool-section" data-category="image-tools">
+                        <h2>Image Tools</h2>
+                        <div class="grid-layout">
+                            <a href="#compress-image" class="card-link"><div class="card"><i class="fas fa-compress-arrows-alt card-icon"></i><h3 class="card-title">Image Compressor</h3></div></a>
+                            <a href="#resize-image" class="card-link"><div class="card"><i class="fas fa-expand-arrows-alt card-icon"></i><h3 class="card-title">Image Resizer</h3></div></a>
+                            <a href="#convert-image" class="card-link"><div class="card"><i class="fas fa-sync-alt card-icon"></i><h3 class="card-title">Format Converter</h3></div></a>
+                            <a href="#pdf-to-image" class="card-link"><div class="card"><i class="fas fa-file-image card-icon"></i><h3 class="card-title">PDF to Image</h3></div></a>
+                            <a href="#image-to-pdf" class="card-link"><div class="card"><i class="fas fa-file-pdf card-icon"></i><h3 class="card-title">Image to PDF</h3></div></a>
+                            <a href="#remove-bg" class="card-link"><div class="card"><i class="fas fa-eraser card-icon"></i><h3 class="card-title">Remove Background</h3></div></a>
+                            <a href="#profile-photo" class="card-link"><div class="card"><i class="fas fa-user-circle card-icon"></i><h3 class="card-title">Profile Photo Maker</h3></div></a>
+                            <a href="#crop-image" class="card-link"><div class="card"><i class="fas fa-crop-alt card-icon"></i><h3 class="card-title">Crop Image</h3></div></a>
+                        </div>
+                    </section>
+
+                    <section id="pdf-tools" class="tool-section" data-category="pdf-tools">
+                        <h2>PDF Tools</h2>
+                        <div class="grid-layout">
+                            <a href="#merge-pdf" class="card-link"><div class="card"><i class="fas fa-object-group card-icon"></i><h3 class="card-title">Merge PDF</h3></div></a>
+                            <a href="#split-pdf" class="card-link"><div class="card"><i class="fas fa-object-ungroup card-icon"></i><h3 class="card-title">Split PDF</h3></div></a>
+                            <a href="#compress-pdf" class="card-link"><div class="card"><i class="fas fa-file-archive card-icon"></i><h3 class="card-title">Compress PDF</h3></div></a>
+                            <a href="#pdf-to-word" class="card-link"><div class="card"><i class="fas fa-file-word card-icon"></i><h3 class="card-title">PDF to Word</h3></div></a>
+                            <a href="#word-to-pdf" class="card-link"><div class="card"><i class="fas fa-file-import card-icon"></i><h3 class="card-title">Word to PDF</h3></div></a>
+                            <a href="#sign-pdf" class="card-link"><div class="card"><i class="fas fa-signature card-icon"></i><h3 class="card-title">Sign PDF</h3></div></a>
+                            <a href="#watermark-pdf" class="card-link"><div class="card"><i class="fas fa-stamp card-icon"></i><h3 class="card-title">Watermark PDF</h3></div></a>
+                            <a href="#rotate-pdf" class="card-link"><div class="card"><i class="fas fa-redo card-icon"></i><h3 class="card-title">Rotate PDF</h3></div></a>
+                            <a href="#unlock-pdf" class="card-link"><div class="card"><i class="fas fa-unlock card-icon"></i><h3 class="card-title">Unlock PDF</h3></div></a>
+                            <a href="#protect-pdf" class="card-link"><div class="card"><i class="fas fa-lock card-icon"></i><h3 class="card-title">Protect PDF</h3></div></a>
+                        </div>
+                    </section>
+
+                    <section id="calculators" class="tool-section" data-category="calculators">
+                        <h2>Calculators</h2>
+                        <div class="grid-layout">
+                            <a href="#basic-calculator" class="card-link"><div class="card"><i class="fas fa-calculator card-icon"></i><h3 class="card-title">Basic Calculator</h3></div></a>
+                            <a href="#scientific-calculator" class="card-link"><div class="card"><i class="fas fa-flask card-icon"></i><h3 class="card-title">Scientific Calculator</h3></div></a>
+                            <a href="#loan-calculator" class="card-link"><div class="card"><i class="fas fa-landmark card-icon"></i><h3 class="card-title">Loan Calculator</h3></div></a>
+                            <a href="#mortgage-calculator" class="card-link"><div class="card"><i class="fas fa-home card-icon"></i><h3 class="card-title">Mortgage Calculator</h3></div></a>
+                            <a href="#currency-converter" class="card-link"><div class="card"><i class="fas fa-exchange-alt card-icon"></i><h3 class="card-title">Currency Converter</h3></div></a>
+                            <a href="#tax-calculator" class="card-link"><div class="card"><i class="fas fa-wallet card-icon"></i><h3 class="card-title">Income Tax Calculator</h3></div></a>
+                            <a href="#discount-calculator" class="card-link"><div class="card"><i class="fas fa-tag card-icon"></i><h3 class="card-title">Discount Calculator</h3></div></a>
+                            <a href="#unit-converter" class="card-link"><div class="card"><i class="fas fa-ruler-combined card-icon"></i><h3 class="card-title">Unit Converter</h3></div></a>
+                            <a href="#age-calculator" class="card-link"><div class="card"><i class="fas fa-birthday-cake card-icon"></i><h3 class="card-title">Age Calculator</h3></div></a>
+                            <a href="#bmi-calculator" class="card-link"><div class="card"><i class="fas fa-weight card-icon"></i><h3 class="card-title">BMI Calculator</h3></div></a>
+                            <a href="#bmr-calculator" class="card-link"><div class="card"><i class="fas fa-fire card-icon"></i><h3 class="card-title">Calorie Calculator</h3></div></a>
+                            <a href="#date-calculator" class="card-link"><div class="card"><i class="fas fa-calendar-alt card-icon"></i><h3 class="card-title">Date Calculator</h3></div></a>
+                            <a href="#tip-calculator" class="card-link"><div class="card"><i class="fas fa-hand-holding-usd card-icon"></i><h3 class="card-title">Tip Calculator</h3></div></a>
+                            <a href="#fuel-calculator" class="card-link"><div class="card"><i class="fas fa-gas-pump card-icon"></i><h3 class="card-title">Fuel Cost Calculator</h3></div></a>
+                            <a href="#percentage-calculator" class="card-link"><div class="card"><i class="fas fa-percentage card-icon"></i><h3 class="card-title">Percentage Calculator</h3></div></a>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabLinks = document.querySelectorAll('.tab-link');
+            const tabPanes = document.querySelectorAll('.tab-pane');
+            const categoryFilter = document.getElementById('category-filter');
+            const toolSections = document.querySelectorAll('.tool-section');
+            const themeSwitcher = document.getElementById('theme-switcher');
+
+            // --- Tab Switching Logic ---
+            tabLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    const tabId = link.getAttribute('data-tab');
+                    tabLinks.forEach(item => item.classList.remove('active'));
+                    tabPanes.forEach(pane => pane.classList.remove('active'));
+                    link.classList.add('active');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+
+            // --- Modern Theme Switcher Logic ---
+            themeSwitcher.addEventListener('change', (e) => {
+                if (e.target.name === 'theme') {
+                    document.documentElement.setAttribute('data-theme', e.target.value);
+                }
+            });
+
+            // --- Category Filter Logic ---
+            categoryFilter.addEventListener('click', (e) => {
+                const clickedButton = e.target.closest('.toggle-btn');
+                if (!clickedButton) return;
+                e.preventDefault();
+                categoryFilter.querySelector('.toggle-btn.active').classList.remove('active');
+                clickedButton.classList.add('active');
+                const category = clickedButton.getAttribute('data-category');
+                
+                toolSections.forEach(section => {
+                    if (category === 'all' || section.getAttribute('data-category') === category) {
+                        section.style.display = 'block';
+                    } else {
+                        section.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
