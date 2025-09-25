@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Compressor | Optimize & Reduce Image Size for SEO</title>
+    <meta name="description" content="A free, responsive online tool to compress and optimize your images. Reduce image file size for faster website loading and better SEO performance with our dynamic compression level selector.">
+    <meta name="keywords" content="image compressor, image optimizer, seo image optimization, reduce image size, compress jpeg, compress png">
+    <meta name="author" content="Your Name or Company">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Image Compressor | Optimize & Reduce Image Size for SEO">
+    <meta property="og:description" content="Easily compress and optimize your images online. Improve your website's speed and SEO with our responsive image compression tool.">
+    <meta property="og:image" content="https://example.com/your-og-image.jpg">
+    <meta property="og:url" content="https://example.com/image-compressor">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Image Compressor | Optimize & Reduce Image Size for SEO">
+    <meta name="twitter:description" content="A powerful and easy-to-use tool to reduce image file sizes, helping to boost your website's performance and search engine ranking.">
+    <meta name="twitter:image" content="https://example.com/your-twitter-card-image.jpg">
+
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <!-- Structured Data (Schema.org) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Image Compressor",
+      "description": "A free, responsive online tool to compress and optimize your images for better website performance and SEO.",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "All",
+      "browserRequirements": "Requires a modern browser with JavaScript enabled.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0"
+      }
+    }
+    </script>
+
+    <style>
+        :root {
+            --bg-color: #f0f2f5;
+            --container-bg: #ffffff;
+            --text-color: #333;
+            --primary-color: #1a73e8;
+            --border-color: #ccc;
+            --slider-bg: #ddd;
+            --download-btn-bg: #28a745;
+            --download-btn-hover-bg: #218838;
+            --theme-bar-bg: #e9ecef;
+            --ad-placeholder-bg: #e9ecef;
+            --ad-placeholder-border: #ddd;
+            --ad-placeholder-text: #999;
+        }
+
+        .theme-ocean {
+            --bg-color: #e0f7fa;
+            --container-bg: #ffffff;
+            --text-color: #004d40;
+            --primary-color: #00796b;
+            --border-color: #b2dfdb;
+            --slider-bg: #b2dfdb;
+            --download-btn-bg: #00897b;
+            --download-btn-hover-bg: #00695c;
+            --theme-bar-bg: #b2dfdb;
+            --ad-placeholder-bg: #b2dfdb;
+            --ad-placeholder-border: #80cbc4;
+            --ad-placeholder-text: #004d40;
+        }
+
+        .theme-dark {
+            --bg-color: #121212;
+            --container-bg: #1e1e1e;
+            --text-color: #e0e0e0;
+            --primary-color: #bb86fc;
+            --border-color: #444;
+            --slider-bg: #444;
+            --download-btn-bg: #03dac6;
+            --download-btn-hover-bg: #018786;
+            --theme-bar-bg: #2c2c2c;
+            --ad-placeholder-bg: #2c2c2c;
+            --ad-placeholder-border: #444;
+            --ad-placeholder-text: #888;
+        }
+
+        .theme-light {
+            --bg-color: #f0f2f5;
+            --container-bg: #ffffff;
+            --text-color: #333;
+            --primary-color: #1a73e8;
+            --border-color: #ccc;
+            --slider-bg: #ddd;
+            --download-btn-bg: #28a745;
+            --download-btn-hover-bg: #218838;
+            --theme-bar-bg: #e9ecef;
+            --ad-placeholder-bg: #e9ecef;
+            --ad-placeholder-border: #ddd;
+            --ad-placeholder-text: #999;
+        }
+
+        .theme-sunset {
+            --bg-color: #fbe9e7;
+            --container-bg: #fff3e0;
+            --text-color: #4e342e;
+            --primary-color: #ff7043;
+            --border-color: #ffccbc;
+            --slider-bg: #ffccbc;
+            --download-btn-bg: #f4511e;
+            --download-btn-hover-bg: #e64a19;
+            --theme-bar-bg: #ffccbc;
+            --ad-placeholder-bg: #ffccbc;
+            --ad-placeholder-border: #ffab91;
+            --ad-placeholder-text: #4e342e;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column; /* Changed for ad layout */
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .ad-container {
+            width: 100%;
+            max-width: 728px; /* Common banner ad width */
+            margin: 15px 0;
+            padding: 0 15px;
+            box-sizing: border-box;
+            text-align: center;
+            min-height: 90px; /* Common banner ad height */
+            background-color: var(--ad-placeholder-bg);
+            border: 2px dashed var(--ad-placeholder-border);
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--ad-placeholder-text);
+            transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+        }
+
+        .container {
+            background-color: var(--container-bg);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 600px;
+            box-sizing: border-box;
+            transition: background-color 0.3s;
+        }
+        
+        .theme-switcher {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 25px;
+            background-color: var(--theme-bar-bg);
+            border-radius: 8px;
+            padding: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .theme-btn {
+            flex-grow: 1; 
+            padding: 8px 12px;
+            border: none;
+            background-color: transparent;
+            color: var(--text-color);
+            cursor: pointer;
+            border-radius: 6px; 
+            transition: background-color 0.3s, color 0.3s;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .theme-btn.active {
+            background-color: var(--primary-color);
+            color: #ffffff;
+        }
+
+        .theme-dark .theme-btn.active { color: #121212; }
+        .theme-btn:not(.active):hover { background-color: rgba(0, 0, 0, 0.05); }
+        .theme-dark .theme-btn:not(.active):hover { background-color: rgba(255, 255, 255, 0.1); }
+
+        h1 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-top: 0;
+            margin-bottom: 20px;
+            transition: color 0.3s;
+        }
+
+        .upload-area {
+            border: 2px dashed var(--border-color);
+            border-radius: 8px;
+            padding: 40px;
+            text-align: center;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: border-color 0.3s;
+        }
+
+        .upload-area:hover { border-color: var(--primary-color); }
+        #file-input { display: none; }
+
+        .controls { margin-bottom: 20px; }
+
+        .slider-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        label { font-weight: 600; }
+
+        input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 8px;
+            background: var(--slider-bg);
+            border-radius: 5px;
+            outline: none;
+            transition: background-color 0.3s;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: var(--primary-color);
+            cursor: pointer;
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            background: var(--primary-color);
+            cursor: pointer;
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+
+        .image-previews {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        @media (min-width: 600px) {
+            .image-previews { grid-template-columns: 1fr 1fr; }
+        }
+
+        .preview-container {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            transition: border-color 0.3s;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+
+        .image-info {
+            margin-top: 10px;
+            font-weight: 500;
+        }
+
+        .download-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: var(--download-btn-bg);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+
+        .download-btn.disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .download-btn:not(.disabled):hover { background-color: var(--download-btn-hover-bg); }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+
+    <!-- ====================================================== -->
+    <!-- ============== TOP GOOGLE AD CONTAINER =============== -->
+    <!-- ====================================================== -->
+    <div class="ad-container" id="top-ad-container">
+        <!-- Replace this line with your Google Ad Code -->
+        <p style="font-weight: bold;">Top Ad Slot (728x90)</p>
+    </div>
+    <!-- ====================================================== -->
+
+    <div class="container">
+        <div class="theme-switcher">
+            <button class="theme-btn" data-theme="theme-light">Light</button>
+            <button class="theme-btn" data-theme="theme-ocean">Ocean</button>
+            <button class="theme-btn" data-theme="theme-dark">Dark</button>
+            <button class="theme-btn" data-theme="theme-sunset">Sunset</button>
+        </div>
+        
+        <h1>Image Compression Tool</h1>
+        
+        <div class="upload-area" id="upload-area">
+            <p>Click to select an image</p>
+            <input type="file" id="file-input" accept="image/*">
+        </div>
+
+        <div class="controls hidden" id="controls">
+            <label for="compression-slider">Compression Level (<span id="compression-value">70</span>%)</label>
+            <div class="slider-container">
+                <span>Low</span>
+                <input type="range" id="compression-slider" min="10" max="90" value="70">
+                <span>High</span>
+            </div>
+        </div>
+
+        <div class="image-previews hidden" id="previews">
+            <div class="preview-container">
+                <h3>Original Image</h3>
+                <img id="original-image" src="" alt="Original Image">
+                <div class="image-info" id="original-info"></div>
+            </div>
+            <div class="preview-container">
+                <h3>Compressed Image</h3>
+                <img id="compressed-image" src="" alt="Compressed Image">
+                <div class="image-info" id="compressed-info"></div>
+            </div>
+        </div>
+
+        <a class="download-btn disabled" id="download-btn">Download Compressed Image</a>
+    </div>
+
+    <!-- ====================================================== -->
+    <!-- ============ BOTTOM GOOGLE AD CONTAINER ============== -->
+    <!-- ====================================================== -->
+    <div class="ad-container" id="bottom-ad-container">
+        <!-- Replace this line with your Google Ad Code -->
+        <p style="font-weight: bold;">Bottom Ad Slot (728x90)</p>
+    </div>
+    <!-- ====================================================== -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/compressorjs/1.2.1/compressor.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const uploadArea = document.getElementById('upload-area');
+            const fileInput = document.getElementById('file-input');
+            const controls = document.getElementById('controls');
+            const compressionSlider = document.getElementById('compression-slider');
+            const compressionValue = document.getElementById('compression-value');
+            const previews = document.getElementById('previews');
+            const originalImage = document.getElementById('original-image');
+            const originalInfo = document.getElementById('original-info');
+            const compressedImage = document.getElementById('compressed-image');
+            const compressedInfo = document.getElementById('compressed-info');
+            const downloadBtn = document.getElementById('download-btn');
+            const themeButtons = document.querySelectorAll('.theme-btn');
+
+            let originalFile;
+            let compressedFile;
+
+            // --- THEME LOGIC ---
+            function applyTheme(themeName) {
+                document.body.className = '';
+                document.body.classList.add(themeName);
+                localStorage.setItem('selectedTheme', themeName);
+
+                themeButtons.forEach(btn => {
+                    if (btn.getAttribute('data-theme') === themeName) {
+                        btn.classList.add('active');
+                    } else {
+                        btn.classList.remove('active');
+                    }
+                });
+            }
+
+            themeButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const themeName = button.getAttribute('data-theme');
+                    applyTheme(themeName);
+                });
+            });
+
+            const savedTheme = localStorage.getItem('selectedTheme') || 'theme-light';
+            applyTheme(savedTheme);
+
+            // --- COMPRESSION LOGIC ---
+            uploadArea.addEventListener('click', () => fileInput.click());
+
+            fileInput.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    handleFile(file);
+                }
+            });
+
+            function handleFile(file) {
+                originalFile = file;
+                const reader = new FileReader();
+
+                reader.onload = function(event) {
+                    originalImage.src = event.target.result;
+                    originalInfo.textContent = `Size: ${(originalFile.size / 1024).toFixed(2)} KB`;
+                    controls.classList.remove('hidden');
+                    previews.classList.remove('hidden');
+                    compressImage();
+                };
+
+                reader.readAsDataURL(file);
+            }
+
+            compressionSlider.addEventListener('input', () => {
+                compressionValue.textContent = compressionSlider.value;
+                if (originalFile) {
+                    compressImage();
+                }
+            });
+
+            function compressImage() {
+                const quality = parseInt(compressionSlider.value) / 100;
+
+                new Compressor(originalFile, {
+                    quality: quality,
+                    success(result) {
+                        compressedFile = result;
+                        const reader = new FileReader();
+                        
+                        reader.onload = function(event) {
+                            compressedImage.src = event.target.result;
+                            const compressedSizeKB = (compressedFile.size / 1024).toFixed(2);
+                            const originalSizeKB = (originalFile.size / 1024).toFixed(2);
+                            
+                            const sizeReduction = ((originalFile.size - compressedFile.size) / originalFile.size * 100).toFixed(2);
+                            
+                            // Reset innerHTML before adding new content to prevent duplicates
+                            compressedInfo.innerHTML = `Size: ${compressedSizeKB} KB <br>Reduction: ${sizeReduction}%`;
+
+                            downloadBtn.classList.remove('disabled');
+                        };
+
+                        reader.readAsDataURL(compressedFile);
+                    },
+                    error(err) {
+                        console.error(err.message);
+                        alert(`Error: ${err.message}`);
+                    },
+                });
+            }
+
+            downloadBtn.addEventListener('click', (e) => {
+                 e.preventDefault();
+                if (compressedFile && !downloadBtn.classList.contains('disabled')) {
+                    const url = URL.createObjectURL(compressedFile);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    const nameWithoutExt = originalFile.name.split('.').slice(0, -1).join('.') || 'download';
+                    a.download = `compressed-${nameWithoutExt}.${compressedFile.name.split('.').pop()}`;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Resizer | Resize Images Online for Free</title>
+    <meta name="description" content="A fully responsive and professional online tool to resize your images. Easily change image dimensions (width and height) while maintaining aspect ratio. Fast, private, and SEO-optimized.">
+    <meta name="keywords" content="image resizer, resize image, online image resizer, change image size, aspect ratio calculator">
+    <meta name="author" content="Your Name or Company">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Image Resizer | Resize Images Online for Free">
+    <meta property="og:description" content="A powerful and easy-to-use tool to change the dimensions of your images. Works on any device and respects your privacy.">
+    <meta property="og:image" content="https://example.com/your-og-image-resizer.jpg">
+    <meta property="og:url" content="https://example.com/image-resizer">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Image Resizer | Resize Images Online for Free">
+    <meta name="twitter:description" content="Quickly resize images with our responsive online tool. Control width, height, and lock the aspect ratio for perfect results.">
+    <meta name="twitter:image" content="https://example.com/your-twitter-card-image-resizer.jpg">
+
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <!-- Structured Data (Schema.org) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Image Resizer",
+      "description": "A free, responsive online tool to resize images by specifying new width and height dimensions.",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "All",
+      "browserRequirements": "Requires a modern browser with JavaScript enabled.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0"
+      }
+    }
+    </script>
+
+    <style>
+        :root {
+            --bg-color: #f0f2f5;
+            --container-bg: #ffffff;
+            --text-color: #333;
+            --primary-color: #1a73e8;
+            --border-color: #ccc;
+            --input-bg: #f8f9fa;
+            --download-btn-bg: #28a745;
+            --download-btn-hover-bg: #218838;
+            --theme-bar-bg: #e9ecef;
+            --ad-placeholder-bg: #e9ecef;
+            --ad-placeholder-border: #ddd;
+            --ad-placeholder-text: #999;
+        }
+
+        .theme-ocean {
+            --bg-color: #e0f7fa;
+            --container-bg: #ffffff;
+            --text-color: #004d40;
+            --primary-color: #00796b;
+            --border-color: #b2dfdb;
+            --input-bg: #e0f2f1;
+            --download-btn-bg: #00897b;
+            --download-btn-hover-bg: #00695c;
+            --theme-bar-bg: #b2dfdb;
+            --ad-placeholder-bg: #b2dfdb;
+            --ad-placeholder-border: #80cbc4;
+            --ad-placeholder-text: #004d40;
+        }
+
+        .theme-dark {
+            --bg-color: #121212;
+            --container-bg: #1e1e1e;
+            --text-color: #e0e0e0;
+            --primary-color: #bb86fc;
+            --border-color: #444;
+            --input-bg: #2c2c2c;
+            --download-btn-bg: #03dac6;
+            --download-btn-hover-bg: #018786;
+            --theme-bar-bg: #2c2c2c;
+            --ad-placeholder-bg: #2c2c2c;
+            --ad-placeholder-border: #444;
+            --ad-placeholder-text: #888;
+        }
+
+        .theme-light {
+             /* Already defined in :root */
+        }
+
+        .theme-sunset {
+            --bg-color: #fbe9e7;
+            --container-bg: #fff3e0;
+            --text-color: #4e342e;
+            --primary-color: #ff7043;
+            --border-color: #ffccbc;
+            --input-bg: #fbe9e7;
+            --download-btn-bg: #f4511e;
+            --download-btn-hover-bg: #e64a19;
+            --theme-bar-bg: #ffccbc;
+            --ad-placeholder-bg: #ffccbc;
+            --ad-placeholder-border: #ffab91;
+            --ad-placeholder-text: #4e342e;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column; /* Changed for ad layout */
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        .ad-container {
+            width: 100%;
+            max-width: 728px; /* Common banner ad width */
+            margin: 15px 0;
+            padding: 0 15px;
+            box-sizing: border-box;
+            text-align: center;
+            min-height: 90px; /* Common banner ad height */
+            background-color: var(--ad-placeholder-bg);
+            border: 2px dashed var(--ad-placeholder-border);
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--ad-placeholder-text);
+            transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+        }
+
+        .container {
+            background-color: var(--container-bg);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 600px;
+            box-sizing: border-box;
+            transition: background-color 0.3s;
+        }
+        
+        .theme-switcher {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 25px;
+            background-color: var(--theme-bar-bg);
+            border-radius: 8px;
+            padding: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .theme-btn {
+            flex-grow: 1; 
+            padding: 8px 12px;
+            border: none;
+            background-color: transparent;
+            color: var(--text-color);
+            cursor: pointer;
+            border-radius: 6px; 
+            transition: background-color 0.3s, color 0.3s;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .theme-btn.active {
+            background-color: var(--primary-color);
+            color: #ffffff;
+        }
+
+        .theme-dark .theme-btn.active { color: #121212; }
+        .theme-btn:not(.active):hover { background-color: rgba(0, 0, 0, 0.05); }
+        .theme-dark .theme-btn:not(.active):hover { background-color: rgba(255, 255, 255, 0.1); }
+
+        h1 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-top: 0;
+            margin-bottom: 20px;
+            transition: color 0.3s;
+        }
+
+        .upload-area {
+            border: 2px dashed var(--border-color);
+            border-radius: 8px;
+            padding: 40px;
+            text-align: center;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: border-color 0.3s;
+        }
+
+        .upload-area:hover { border-color: var(--primary-color); }
+        #file-input { display: none; }
+
+        .controls { margin-bottom: 20px; }
+        
+        .dimension-controls {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            flex-grow: 1;
+        }
+
+        .input-group label {
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .input-group input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            background-color: var(--input-bg);
+            color: var(--text-color);
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        
+        .aspect-ratio-lock {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 15px;
+        }
+
+        #aspect-lock-label {
+            cursor: pointer;
+            font-size: 24px;
+        }
+
+        #keep-aspect-ratio { display: none; }
+
+        .image-previews {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        @media (min-width: 600px) {
+            .image-previews { grid-template-columns: 1fr 1fr; }
+        }
+
+        .preview-container {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            transition: border-color 0.3s;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+
+        .image-info {
+            margin-top: 10px;
+            font-weight: 500;
+        }
+
+        .download-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: var(--download-btn-bg);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+
+        .download-btn.disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .download-btn:not(.disabled):hover { background-color: var(--download-btn-hover-bg); }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+
+    <!-- ====================================================== -->
+    <!-- ============== TOP GOOGLE AD CONTAINER =============== -->
+    <!-- ====================================================== -->
+    <div class="ad-container" id="top-ad-container">
+        <!-- Replace this line with your Google Ad Code -->
+        <p style="font-weight: bold;">Top Ad Slot (728x90)</p>
+    </div>
+    <!-- ====================================================== -->
+
+    <div class="container">
+        <div class="theme-switcher">
+            <button class="theme-btn" data-theme="theme-light">Light</button>
+            <button class="theme-btn" data-theme="theme-ocean">Ocean</button>
+            <button class="theme-btn" data-theme="theme-dark">Dark</button>
+            <button class="theme-btn" data-theme="theme-sunset">Sunset</button>
+        </div>
+        
+        <h1>Image Resizer</h1>
+        
+        <div class="upload-area" id="upload-area">
+            <p>Click to select an image</p>
+            <input type="file" id="file-input" accept="image/*">
+        </div>
+
+        <div class="controls hidden" id="controls">
+            <div class="dimension-controls">
+                <div class="input-group">
+                    <label for="width-input">Width (px)</label>
+                    <input type="number" id="width-input" min="1">
+                </div>
+                
+                <div class="aspect-ratio-lock">
+                    <input type="checkbox" id="keep-aspect-ratio" checked>
+                    <label for="keep-aspect-ratio" id="aspect-lock-label" title="Lock Aspect Ratio">🔒</label>
+                </div>
+
+                <div class="input-group">
+                    <label for="height-input">Height (px)</label>
+                    <input type="number" id="height-input" min="1">
+                </div>
+            </div>
+        </div>
+
+        <div class="image-previews hidden" id="previews">
+            <div class="preview-container">
+                <h3>Original Image</h3>
+                <img id="original-image" src="" alt="Original Image">
+                <div class="image-info" id="original-info"></div>
+            </div>
+            <div class="preview-container">
+                <h3>Resized Image</h3>
+                <canvas id="resized-canvas" class="hidden"></canvas>
+                <img id="resized-image" src="" alt="Resized Image">
+                <div class="image-info" id="resized-info"></div>
+            </div>
+        </div>
+
+        <a class="download-btn disabled" id="download-btn">Download Resized Image</a>
+    </div>
+
+    <!-- ====================================================== -->
+    <!-- ============ BOTTOM GOOGLE AD CONTAINER ============== -->
+    <!-- ====================================================== -->
+    <div class="ad-container" id="bottom-ad-container">
+        <!-- Replace this line with your Google Ad Code -->
+        <p style="font-weight: bold;">Bottom Ad Slot (728x90)</p>
+    </div>
+    <!-- ====================================================== -->
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const uploadArea = document.getElementById('upload-area');
+            const fileInput = document.getElementById('file-input');
+            const controls = document.getElementById('controls');
+            const widthInput = document.getElementById('width-input');
+            const heightInput = document.getElementById('height-input');
+            const keepAspectRatio = document.getElementById('keep-aspect-ratio');
+            const aspectLockLabel = document.getElementById('aspect-lock-label');
+            const previews = document.getElementById('previews');
+            const originalImage = document.getElementById('original-image');
+            const originalInfo = document.getElementById('original-info');
+            const resizedImage = document.getElementById('resized-image');
+            const resizedCanvas = document.getElementById('resized-canvas');
+            const resizedInfo = document.getElementById('resized-info');
+            const downloadBtn = document.getElementById('download-btn');
+            const themeButtons = document.querySelectorAll('.theme-btn');
+
+            let originalFile;
+            let originalAspectRatio;
+            const image = new Image();
+
+            // --- THEME LOGIC ---
+            function applyTheme(themeName) {
+                document.body.className = '';
+                document.body.classList.add(themeName);
+                localStorage.setItem('selectedThemeResizer', themeName);
+                themeButtons.forEach(btn => {
+                    btn.classList.toggle('active', btn.getAttribute('data-theme') === themeName);
+                });
+            }
+
+            themeButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    applyTheme(button.getAttribute('data-theme'));
+                });
+            });
+
+            const savedTheme = localStorage.getItem('selectedThemeResizer') || 'theme-light';
+            applyTheme(savedTheme);
+
+            // --- IMAGE RESIZER LOGIC ---
+            uploadArea.addEventListener('click', () => fileInput.click());
+            fileInput.addEventListener('change', (e) => handleFile(e.target.files[0]));
+            
+            function handleFile(file) {
+                if (!file) return;
+                originalFile = file;
+
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    image.src = event.target.result;
+                    image.onload = () => {
+                        originalImage.src = event.target.result;
+                        originalInfo.innerHTML = `Dimensions: ${image.naturalWidth} x ${image.naturalHeight}px<br>Size: ${(originalFile.size / 1024).toFixed(2)} KB`;
+                        
+                        originalAspectRatio = image.naturalWidth / image.naturalHeight;
+                        widthInput.value = image.naturalWidth;
+                        heightInput.value = image.naturalHeight;
+
+                        controls.classList.remove('hidden');
+                        previews.classList.remove('hidden');
+                        
+                        resizeImage();
+                    };
+                };
+                reader.readAsDataURL(file);
+            }
+            
+            widthInput.addEventListener('input', () => {
+                if (keepAspectRatio.checked && originalAspectRatio) {
+                    heightInput.value = Math.round(widthInput.value / originalAspectRatio);
+                }
+                resizeImage();
+            });
+
+            heightInput.addEventListener('input', () => {
+                if (keepAspectRatio.checked && originalAspectRatio) {
+                    widthInput.value = Math.round(heightInput.value * originalAspectRatio);
+                }
+                resizeImage();
+            });
+
+            keepAspectRatio.addEventListener('change', () => {
+                aspectLockLabel.textContent = keepAspectRatio.checked ? '🔒' : '🔓';
+                aspectLockLabel.title = keepAspectRatio.checked ? 'Lock Aspect Ratio' : 'Unlock Aspect Ratio';
+            });
+
+            function resizeImage() {
+                let width = parseInt(widthInput.value);
+                let height = parseInt(heightInput.value);
+
+                if (isNaN(width) || isNaN(height) || width < 1 || height < 1) {
+                    downloadBtn.classList.add('disabled');
+                    return;
+                }
+                
+                resizedCanvas.width = width;
+                resizedCanvas.height = height;
+                const ctx = resizedCanvas.getContext('2d');
+                ctx.drawImage(image, 0, 0, width, height);
+
+                resizedCanvas.toBlob((blob) => {
+                    if (blob) {
+                        const resizedImageUrl = URL.createObjectURL(blob);
+                        resizedImage.src = resizedImageUrl;
+                        resizedInfo.innerHTML = `Dimensions: ${width} x ${height}px<br>Size: ${(blob.size / 1024).toFixed(2)} KB`;
+                        
+                        downloadBtn.href = resizedImageUrl;
+                        const nameWithoutExt = originalFile.name.split('.').slice(0, -1).join('.') || 'download';
+                        const fileExtension = originalFile.name.split('.').pop();
+                        downloadBtn.download = `resized-${nameWithoutExt}.${fileExtension}`;
+                        downloadBtn.classList.remove('disabled');
+                    }
+                }, originalFile.type, 0.95); // Using a default quality for JPEG
+            }
+
+            downloadBtn.addEventListener('click', (e) => {
+                if (downloadBtn.classList.contains('disabled')) {
+                    e.preventDefault();
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
